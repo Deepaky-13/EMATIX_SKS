@@ -4,7 +4,7 @@ import {
   NotFoundError,
   UnauthorizedError,
 } from "../Error/customError.js";
-import mongoose from "mongoose";
+import Usermodel from "../models/Usermodel.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -33,7 +33,7 @@ export const validateRegisterInput = withValidationErrors([
     .isEmail()
     .withMessage("Invalid email formate")
     .custom(async (email) => {
-      const user = await User.findOne({ email });
+      const user = await Usermodel.findOne({ email });
       if (user) {
         throw new BadRequestError("email already exits");
       }
@@ -43,6 +43,11 @@ export const validateRegisterInput = withValidationErrors([
     .withMessage("password is Required")
     .isLength({ min: 8 })
     .withMessage("password must contain at least 8 characters long"),
-  body("location").notEmpty().withMessage("location is Required"),
-  body("lastName").notEmpty().withMessage("Last Name is Required"),
+  body("phoneNumber")
+    .notEmpty()
+    .withMessage("phone number is required")
+    .isLength({ min: 10, max: 10 })
+    .withMessage(" phone Number must be 10 digit long")
+    .isNumeric()
+    .withMessage("invalid phone number"),
 ]);

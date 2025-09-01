@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 // * ---------------------------Routers-----------------------------
+import authRouter from "./routers/authRouter.js";
 
 // * ---------------------------public-----------------------------
 
@@ -29,7 +30,7 @@ app.get("/api/v1/test", (req, res) => {
 });
 
 // * -----------------Building-Blocks---------------------------------
-
+app.use("/api/v1/auth", authRouter);
 // * -----------------------------------------------------------
 
 const port = process.env.PORT || 3000;
