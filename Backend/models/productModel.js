@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ratingSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    rating: { type: String },  
+    rating: { type: String },
     comment: { type: String },
   },
   { timestamps: true }
@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema(
   {
     productName: { type: String, trim: true },
     productDescription: { type: String },
-    productPrice: { type: String },   
+    productPrice: { type: String },
     discount: { type: String, default: "0" },
     quantity: { type: String },
     productColor: { type: String },

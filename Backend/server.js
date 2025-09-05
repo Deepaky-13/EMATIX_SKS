@@ -9,11 +9,16 @@ import cookieParser from "cookie-parser";
 
 // * ---------------------------Routers-----------------------------
 import authRouter from "./routers/authRouter.js";
+import userRouter from "./routers/userRouter.js";
+import ProductRouter from "./routers/productRouter.js";
+import SalesRouter from "./routers/salesRouter.js";
+import orderRouter from "./routers/orderRouter.js";
 
 // * ---------------------------public-----------------------------
 
 // * --------------General middleware for set up-------------------
-
+import { authenticateUser } from "./controllers/authmiddleware.js";
+ 
 // * -----------Dynamic storing of multimedia-------------------------
 
 if (process.env.NODE_ENV === "develop") {
@@ -31,6 +36,10 @@ app.get("/api/v1/test", (req, res) => {
 
 // * -----------------Building-Blocks---------------------------------
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/products", ProductRouter);
+app.use("/api/v1/sales", SalesRouter);
+app.use("/api/v1/order", orderRouter);
 // * -----------------------------------------------------------
 
 const port = process.env.PORT || 3000;
